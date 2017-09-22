@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="box">
+		<span></span>
+		<p></p>
+
+	</div>
+</body>
+<script>
+/*
+将element插入到position后面
+element 要插入的元素  obj
+position 插入的位置  obj
+ */
+	window.onload=function(){
+		let box=document.getElementsByClassName('box')[0];
+		let p=box.getElementsByTagName('p')[0];
+		let divs=document.createElement('div')
+		console.log(divs);
+		box.prependChild(divs)
+
+
+		function insertAfter(element,position){
+			let next=position.nextElementSibling;
+			let parent=position.parentNode;
+			if(next){
+				parent.insertBefore(element,next);
+			}
+			else{
+				parent.appendChild(element);
+			}
+		}
+		// 在父元素的第一个位置插入子元素
+		HTMLElement.prototype.prependChild=function(element){
+			let first=this.firstElementChild;
+			if(first){
+				this.insertBefore(element, first);
+			}else{
+				this.appendChild(element);
+			}
+		}
+
+		/*HTMLElement.prototype.prependChild=function(element){
+			// 先找这个节点中第一个子节点
+			let first=this.firstElementChild;
+			// 判断是否存在第一个子节点
+			if(first){
+				// 在第一个子节点之前把element插入进去
+				this.insertBefore(element, first);
+			}else{
+				// 判断没有时，直接在这个节点里面插入
+				this.appendChild(element);
+			}
+		}*/
+		// 把子元素插入到父元素中
+		HTMLElement.prototype.appendTo=function(element){
+			element.appendChild(this)
+		}
+	}
+</script>
+</html>

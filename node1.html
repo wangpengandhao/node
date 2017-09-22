@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.circle{
+		width: 1px;
+		height: 1px;
+		background: red;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
+	.son{
+		width: 20px;
+		height: 20px;
+		background: pink;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		border-radius: 50%;
+		transition: all cubic-bezier(1,-1.69, 0.56, 1.31) 1s;
+		cursor: pointer;
+	}
+</style>
+<body>
+	<div class="circle"></div>
+	<!-- lefts=r*Math.cos(deg);
+	tops=r*Math.sin(deg);
+	Math.PI
+	deg=num   360 -->
+</body>
+<script>
+	window.onload=function(){
+		// 获取div.circle这个元素
+		let circle=document.querySelector('div.circle');
+		setInterval(function(){
+			circles(90,100);
+			// circles(30,200);
+			// circles(30,150);
+		}, 1000)
+		
+		function circles(num,radius){
+
+			for(let i=0;i<num;i++){
+				let r=radius;
+				if(i%30==0){
+					r+=30
+				}
+				// 创建div这个元素节点
+				let divs=document.createElement('div');
+				// 添加类名
+				divs.className='son';
+				let deg=(((360/num)*Math.PI)/180)*i
+				let lefts=r*Math.cos(deg);
+				let tops=r*Math.sin(deg);
+				// divs.style.left=`${lefts}px`;
+				// divs.style.top=`${tops}px`;	
+				divs.style.background=color();
+				setTimeout(function(){
+					// 给每次随机的过渡延迟
+					// divs.style.transitionDelay=`${Math.random()*100}ms`
+					// 每一次出现的过渡延迟为100*i ms
+					divs.style.transitionDelay=`${100*i}ms`
+					divs.style.left=`${lefts}px`;
+					divs.style.top=`${tops}px`;	
+				}, 60)
+				// 把divs插入到circle这个元素中
+				circle.appendChild(divs);	
+			}
+		}
+		// 随机的rgb颜色的获取
+		// 方法一
+		// function color(){
+		// 	let arr=[];
+		// 	for(let i=0;i<3;i++){
+		// 		let num=Math.floor(Math.random()*256);
+		// 		arr.push(num);
+		// 	}
+		// 	str='rgb('+arr.join()+')';
+		// 	return str;
+		// }
+		
+		// 方法二
+		function color(){
+			let str='rgb(';
+			for(let i=0;i<3;i++){
+				let num=Math.floor((Math.random()*266));
+				str+=num+',';
+			}
+			str=str.slice(0,-1);
+			str+=')';
+			return str;
+		}
+
+	}
+</script>
+</html>

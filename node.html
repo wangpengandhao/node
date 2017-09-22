@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+	<style>
+		div{
+			width: 30px;
+			height: 30px;
+			background: pink;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			border-radius: 50%;
+			transition: all ease 1s;
+		}
+	</style>
+<body>
+	<!-- lefts=r*Math.cos(deg);
+	tops=r*Math.sin(deg);
+	Math.PI
+	deg=num   360 -->
+	
+</body>
+	<script>
+		window.onload=function(){
+			random()
+			function random(){
+				for(let i=0;i<20;i++){
+				let divs=document.createElement('div');
+				let lefts=Math.floor(Math.random()*(innerWidth-100));
+				let tops=Math.floor(Math.random()*(innerHeight-100));
+				let width=Math.floor(Math.random()*70+30);
+				divs.style.width=`${width}px`;
+				divs.style.height=`${width}px`;
+				// divs.style.left=`${lefts}px`;
+				// divs.style.top=`${tops}px`;
+				divs.style.background=color();
+				document.body.appendChild(divs);
+				setTimeout(function(){
+					divs.style.transitionDelay=`${(Math.random()*100)}ms`
+					// divs.style.transitionDelay=`${i*100}ms`
+					divs.style.left=`${lefts}px`;
+					divs.style.top=`${tops}px`;
+				},50)
+				}
+			}
+			function color(){
+				let arr=[];
+				for(let i=0;i<3;i++){
+					let num=Math.floor(Math.random()*256);
+					arr.push(num);
+				}
+				str='rgb('+arr.join()+')';
+				return str;
+			}
+		}
+	</script>
+</html>
